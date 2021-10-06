@@ -29,26 +29,31 @@
 			my_span3.innerHTML =  Items["colors"][0]["name"];
 			let my_span4 = document.querySelector("#facadePrint");
 			my_span4.innerHTML =  Items["facade"][0]["name"];
-				//var div1 = document.querySelector("#toP");
-	//div1.style.backgroundImage ="url('img/template.png')";
+		
       $(document).on('click', '.btn_save', function (event) {
          event.preventDefault();
 		
 			
         var element = document.getElementById('toPDF');
-		
+		  var div1 = document.querySelector("#toPDF");
+	div1.style.backgroundImage ="url('img/template.png')";
          var opt =
          {
             margin: 1,
             filename: 'pageContent_' + js.AutoCode() + '.pdf',
             image: { type: 'jpeg', quality: 0.98 },
+				
             html2canvas: { scale: 2 },
             jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
          };
 
          // New Promise-based usage:
          html2pdf().set(opt).from(element).save();
-		
+			function sayHi() {
+ 	div1.style.backgroundImage ="url('')";
+}
+
+setTimeout(sayHi, 1500);
 
       });
 
@@ -56,11 +61,11 @@
 		$(document).on('click', '.btn_print', function(event)
 		{
             event.preventDefault();
-
+				var div1 = document.querySelector("#toPDF");
+	div1.style.backgroundImage ="url('img/template.png')";
             //credit : https://ekoopmans.github.io/html2pdf.js
 
             var element = document.getElementById('toPDF');
-
 
            
             html2pdf().from(element).toPdf().get('pdf').then(function (pdfObj) {
@@ -70,9 +75,13 @@
 
             });
 				
+			
+				function sayHi() {
+ 	div1.style.backgroundImage ="url('')";
+}
 
-
-           
+setTimeout(sayHi, 1500);
+          
 
 
          });
