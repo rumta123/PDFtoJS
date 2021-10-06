@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<!--script async="" src="https://323test.na4u.ru/conf/js/html2canvas.min.js"></!--script>
+<script async="" src="https://323test.na4u.ru/conf/js/jspdf.debug.js"></script>
+<script-- async="" src="https://323test.na4u.ru/conf/js/es6-promise.auto.min.js"></script-->
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> 
+	<script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script> 
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
+
+ 
+
+	<script type="text/javascript">
+   $(document).ready(function ($) {
+		let my_span3 = document.querySelector("#colorPrint");
+			my_span3.innerHTML =  Items["colors"][0]["name"];
+			let my_span4 = document.querySelector("#facadePrint");
+			my_span4.innerHTML =  Items["facade"][0]["name"];
+				//var div1 = document.querySelector("#toP");
+	//div1.style.backgroundImage ="url('img/template.png')";
+      $(document).on('click', '.btn_save', function (event) {
+         event.preventDefault();
+		
+			
+        var element = document.getElementById('toPDF');
+		
+         var opt =
+         {
+            margin: 1,
+            filename: 'pageContent_' + js.AutoCode() + '.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+         };
+
+         // New Promise-based usage:
+         html2pdf().set(opt).from(element).save();
+		
+
+      });
+
+      // print
+		$(document).on('click', '.btn_print', function(event)
+		{
+            event.preventDefault();
+
+            //credit : https://ekoopmans.github.io/html2pdf.js
+
+            var element = document.getElementById('toPDF');
+
+
+           
+            html2pdf().from(element).toPdf().get('pdf').then(function (pdfObj) {
+              
+               pdfObj.autoPrint();
+               window.open(pdfObj.output('bloburl'), '_blank');
+
+            });
+				
+
+
+           
+
+
+         });
+     
+   });
+
+</script>
+
+
+
+<style type="text/css">
+	div.bg {
+		position: relative;
+		width: 900px;
+		height: 300px;
+		background-image: url('/img/bg.jpg');
+		background-size: cover;
+		z-index: 1;
+		margin: -553px 0 0 0;
+		opacity: 0.5;
+		border-radius: 5px;
+	}
+
+	div.front {
+		top: -130px;
+		position: relative;
+		width: 900px;
+		height: 400px;
+		background-image: url('img/facade-mdf/Viola.png');
+		background-size: 900px 400px;
+		margin: 0;
+		padding: 0;
+		z-index: 4;
+	}
+
+	div.back {
+		top: 18px;
+    position: relative;
+    width: 900px;
+    height: 400px;
+    background-image: url(img/texture-color/Barkhatnyy_mirazh.png);
+    background-size: 900px 400px;
+    margin: -560px 0 0 0;
+    padding: 0;
+    z-index: 2;
+	}
+
+	div.box1 {
+		position: relative;
+		width: 400px;
+		height: 530px;
+		margin: 50px 0 0 40px;
+		background-color: rgba(5, 5, 5, 0.03);
+		border-radius: 5px;
+		overflow-y: auto
+	}
+
+	div.box2 {
+		position: relative;
+		width: 400px;
+		height: 270px;
+		top: -270px;
+		margin: -260px 0 0 460px;
+		background-color: rgba(5, 5, 5, 0.03);
+		border-radius: 5px;
+		overflow-y: auto
+	}
+
+	div.boxElem:hover {
+		outline: 1px inset red;
+		outline-offset: -2px;
+		border-radius: 3px
+	}
+
+	.activeItem {
+		outline: 4px inset #ADFF2F;
+		outline-offset: -4px;
+		border-radius: 6px
+	}
+
+	div.boxElem {
+		position: relative;
+		float: left;
+		width: 85px;
+		height: 120px;
+		margin: 5px;
+		border-radius: 5px;
+		cursor: pointer;
+		border: inset red 0px;
+		line-height: 1;
+		background-size: cover;
+		background-position: center;
+	}
+
+	.buttons a.button,
+	.buttons input:disabled:active,
+	.buttons input {
+		font-size: 12px;
+		padding: 5px 10px;
+		background: #EAECEA !important;
+		color: #222 !important;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		border: solid 1px #aaa;
+		-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+		-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+		-webkit-transition-duration: 0.2s;
+		-moz-transition-duration: 0.2s;
+		transition-duration: 0.2s;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		cursor: pointer;
+		font-family: verdana, sans-serif;
+		text-decoration: none
+	}
+
+	.buttons a.button:hover,
+	.buttons input:hover {
+		background: #dddddd !important;
+		border: solid 1px #999;
+		text-decoration: none
+	}
+
+	.buttons a.button:active,
+	.buttons input:active {
+		-webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+		-moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+		box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+		background: #a9a9a9 !important;
+		border: solid 1px #777
+	}
+
+	.buttons a.button:disabled:active,
+	.buttons a.button:disabled,
+	.buttons input:disabled:active,
+	.buttons input:disabled {
+		background: #fAfCfA !important;
+		color: #aaa !important;
+		border: solid 1px #eee
+	}
+
+	.buttons a.button.big,
+	.buttons input.big,
+	.buttons input:hover.big,
+	.buttons input:active.big {
+		font-size: 20px
+	}
+
+	.cartbtn {}
+
+	.leftstr,
+	.rightstr {
+		float: left;
+		width: 50%;
+		margin-left: 170px;
+		font-size: 16px
+	}
+
+	.rightstr {
+		text-align: right;
+		margin-left: -395px;
+		font-size: 16px
+	}
+
+	::-webkit-scrollbar {
+		width: 10px
+	}
+
+	::-webkit-scrollbar-track {
+		background: #f1f1f1
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: #888
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: #555
+	}
+
+	.num {
+		position: relative;
+		font-size: smaller;
+		top: 3px;
+		left: 0px;
+		text-align: center;
+		color: white;
+		background-color: rgba(0, 0, 0, 0.15)
+	}
+
+	.num2 {
+		position: relative;
+		top: 1px;
+		left: 0px;
+		color: rgba(0, 0, 0, 0);
+		background-color: rgba(0, 0, 0, 0)
+	}
+
+	.btns {
+		position: relative;
+		top: -180px;
+		right: -500px;
+		float: left
+	}
+	#toP{
+		content: "";
+   
+    background-size: cover;
+	}
+</style>
+
+<script type="text/javascript">
+	var colorsPath = "img/texture-color";			// путь до папки с цветами
+	var facadePath = "img/facade-mdf";		// путь до папки с фасадами
+	var selectedColor = "Патина венге премиум"; 			// имя дефолтного цвета
+	var selectedFacade = "Виола";							// имя дефолтного фасада
+	var selectedColorID = 12;								// ID дефолтного цвета
+	var selectedFacadeID = "D";								// ID дефолтного фасада
+
+
+	var Items = { // Тут ничего не трогай.
+		colors: [{
+			id: 0,
+			code: 0,
+			name: "Yello River",
+			preview: colorsPath + "/preview/Yello_river.png",
+			full: colorsPath + "/Yello_river.png"
+		},
+		{
+			id: 1,
+			code: 1,
+			name: "Акация темная",
+			preview: colorsPath + "/preview/Akatsiya_temnaya.png",
+			full: colorsPath + "/Akatsiya_temnaya.png"
+		},
+		{
+			id: 2,
+			code: 2,
+			name: "Ангери",
+			preview: colorsPath + "/preview/Angeri.png",
+			full: colorsPath + "/Angeri.png"
+		},
+		{
+			id: 3,
+			code: 3,
+			name: "Бархатный мираж",
+			preview: colorsPath + "/preview/Barkhatnyy_mirazh.png",
+			full: colorsPath + "/Barkhatnyy_mirazh.png"
+		},
+		{
+			id: 4,
+			code: 4,
+			name: "Венге тёмный тангенс",
+			preview: colorsPath + "/preview/Venge_tomnyy_tangens.png",
+			full: colorsPath + "/Venge_tomnyy_tangens.png"
+		},
+		{
+			id: 5,
+			code: 5,
+			name: "Венге",
+			preview: colorsPath + "/preview/Venge.png",
+			full: colorsPath + "/Venge.png"
+		},
+		{
+			id: 6,
+			code: 6,
+			name: "Дуб антик",
+			preview: colorsPath + "/preview/Dub_antik.png",
+			full: colorsPath + "/Dub_antik.png"
+		},
+		
+		],
+		facade: [{
+			id: 0,
+			code: "A",
+			name: "Амароне",
+			preview: facadePath + "/preview/Amarone.png",
+			full: facadePath + "/Amarone.png"
+		},
+		{
+			id: 1,
+			code: "B",
+			name: "Венера",
+			preview: facadePath + "/preview/Venera.png",
+			full: facadePath + "/Venera.png"
+		},
+	
+		{
+			id: 3,
+			code: "D",
+			name: "Виола",
+			preview: facadePath + "/preview/Viola.png",
+			full: facadePath + "/Viola.png"
+		},
+		{
+			id: 4,
+			code: "E",
+			name: "Вита",
+			preview: facadePath + "/preview/Vita.png",
+			full: facadePath + "/Vita.png"
+		},
+		{
+			id: 5,
+			code: "F",
+			name: "Кристалл",
+			preview: facadePath + "/preview/Kristall.png",
+			full: facadePath + "/Kristall.png"
+		},
+		{
+			id: 6,
+			code: "G",
+			name: "Милан",
+			preview: facadePath + "/preview/Milan.png",
+			full: facadePath + "/Milan.png"
+		},
+		{
+			id: 7,
+			code: "H",
+			name: "Эпоха",
+			preview: facadePath + "/preview/Epoha.png",
+			full: facadePath + "/Epoha.png"
+		}
+		]
+	};
+
+
+</script>
+
+
+<body id ="myBody">
+<div id="toPDF">
+	<div id="toP">
+	<div class="front"></div>
+	<div class="back"></div>
+		Выбранная фрезеровка: <span id="facadePrint"></span><br><br
+	><br>Выбранный цвет: <span id="colorPrint"></span>
+</div>
+</div>
+<div style="display:grid; grid-template-columns: 1fr 1fr;">
+	<div style="margin:0 auto"><b>Вид текстуры</b></div>
+<div><b>Вид фрезеровки</b></div>
+
+</div>
+<div id="parent" class="box1">
+
+</div>
+<div id="parent1" class="box2">
+
+</div>
+
+
+<div class="btns">
+	
+	
+	<div class="text-center" style="padding:20px;">
+		<input type="button" id="rep" value="Сохранить PDF" class="btn btn-info btn_save">
+		<input type="button" id="rep" value="Распечатать PDF" class="btn btn-info btn_print">
+	</div>
+</div>
+<script>
+	for (let i = 0; i <= Items.colors.length - 1; i++) {
+
+		let parent = document.querySelector('#parent');
+
+		let div = document.createElement('div');
+		div.className = "boxElem";
+		div.title = Items["colors"][i]["name"];
+		div.setAttribute('title', Items["colors"][i]["name"]);
+		div.setAttribute('id', 'colorItem-' + Items["colors"][i]["id"]);
+
+
+		let a = (Items["colors"][i]["preview"]);
+		div.id = "myId";
+		div.style.backgroundImage = "url('" + a + "')";
+		parent.appendChild(div);
+		div.innerHTML = Items["colors"][i]["id"];
+
+	}
+
+</script>
+<script>
+	//второй блок
+	for (let i = 0; i <= Items.facade.length - 1; i++) {
+
+		let parent = document.querySelector('#parent1');
+
+		let div = document.createElement('div');
+		div.className = "boxElem";
+		div.id = "myId";
+
+		//console.log(i);
+		div.title = Items["facade"][i]["name"];
+		div.setAttribute('title', Items["facade"][i]["name"]);
+		let a = (Items["facade"][i]["preview"]);
+		div.style.backgroundImage = "url('" + a + "')";
+
+
+
+		parent.appendChild(div);
+
+	}
+
+</script>
+
+
+
+
+<!--скрипт обработки первого блока-->
+<script>
+
+	// Получить элемент parent контейнера
+
+
+
+	let divContainer = document.getElementById("parent");
+	// Сделать все кнопки с class="btn" внутри контейнера
+	let divs = divContainer.getElementsByClassName("boxElem");
+
+
+	//const randomColor = () => colors[Math.floor(Math.random() * colors.length)];
+
+	// Выполните цикл по кнопкам и добавьте активный класс к текущей/нажатой кнопке
+	for (let i = 0; i < divs.length; i++) {
+
+		divs[i].addEventListener("click", function () {
+
+			//document.getElementsByClassName(front).remove()
+			let current = divContainer.getElementsByClassName("activeItem");
+			//console.log(divs[i]);
+			// Если нет активного класса
+			if (current.length > 0) {
+				current[0].className = current[0].className.replace(" activeItem", "");
+
+			}
+			// Добавить активный класс для текущей/нажатой кнопки
+			this.className += " activeItem";
+
+			//добавляем 
+
+			let my_div = document.querySelector('.back');
+
+			let a = (Items["colors"][i]["full"]);
+			my_div.style.backgroundImage = "url('" + a + "')";
+
+
+			let my_span = document.querySelector("#colorPrint");
+			my_span.innerHTML =  Items["colors"][i]["name"];
+			
+			
+		});
+	}
+
+
+</script>
+
+
+<!--скрипт обработки второго блока-->
+<script>
+
+	// Получить элемент parent контейнера
+
+
+
+	let divContainer1 = document.getElementById("parent1");
+	// Сделать все кнопки с class="btn" внутри контейнера
+	let divs1 = divContainer1.getElementsByClassName("boxElem");
+
+	// Выполните цикл по кнопкам и добавьте активный класс к текущей/нажатой кнопке
+	for (let i = 0; i < divs1.length; i++) {
+		divs1[i].addEventListener("click", function () {
+			let current1 = divContainer1.getElementsByClassName("activeItem");
+
+			// Если нет активного класса
+			if (current1.length > 0) {
+				current1[0].className = current1[0].className.replace(" activeItem", "");
+			}
+
+			// Добавить активный класс для текущей/нажатой кнопки
+			this.className += " activeItem";
+			let my_div1 = document.querySelector('.front');
+
+			let a = (Items["facade"][i]["full"]);
+			my_div1.style.backgroundImage = "url('" + a + "')";
+			let my_span = document.querySelector("#facadePrint");
+			my_span.innerHTML =  Items["facade"][i]["name"];
+		});
+	}
+
+
+
+
+
+</script>
+
+
+
+
+
+</body>
+
+</html>
